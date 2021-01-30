@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.sbs.untact.dto.Article;
+import com.sbs.untact.util.Util;
 
 @Controller
 public class UsrArticleController {
@@ -20,7 +21,7 @@ public class UsrArticleController {
 		articlesLastId = 0;
 		articles = new ArrayList<>();
 		
-		articles.add(new Article(++articlesLastId, "2020/01/28", "제목", "내용"));
+		articles.add(new Article(++articlesLastId, "2020/01/28", "2020/01/28", "제목", "내용"));
 		
 	}
 	@RequestMapping("/usr/article/list")
@@ -35,8 +36,11 @@ public class UsrArticleController {
 	}
 	@RequestMapping("/usr/article/doAdd")
 	@ResponseBody
-	public Map<String, Object> doAdd(String regDate, String title, String body) {
-		articles.add(new Article(++articlesLastId, regDate, title, body));
+	public Map<String, Object> doAdd(String title, String body) {
+		String regDate = Util.getNowDate();
+		String updateDate = regDate;
+		
+		articles.add(new Article(++articlesLastId, regDate, updateDate, title, body));
 		Map<String, Object> rs = new HashMap<>();
 		rs.put("resultCode", "S-1");
 		rs.put("msg", "성공하였습니다.");
@@ -84,6 +88,7 @@ public class UsrArticleController {
 			rs.put("Code", "F-1");
 			rs.put("msg", String.format("%d번 게시물은 존재하지 않습니다", id));
 		}
+		selArticle.setUpdateDate(Util.getNowDate());
 		selArticle.setTitle(title);
 		selArticle.setBody(body);
 		
