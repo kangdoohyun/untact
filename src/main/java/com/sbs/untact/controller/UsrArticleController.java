@@ -68,4 +68,29 @@ public class UsrArticleController {
 		}
 		return false;
 	}
+	@RequestMapping("/usr/article/doModify")
+	@ResponseBody
+	public Map<String, Object> doModify(int id, String title, String body) {
+		Article selArticle = null;
+		Map<String, Object> rs = new HashMap<>();
+		
+		for (Article article : articles) {
+			if(article.getId() == id) {
+				selArticle = article;
+				break;
+			}
+		}
+		if(selArticle == null) {
+			rs.put("Code", "F-1");
+			rs.put("msg", String.format("%d번 게시물은 존재하지 않습니다", id));
+		}
+		selArticle.setTitle(title);
+		selArticle.setBody(body);
+		
+		rs.put("Code", "S-1");
+		rs.put("msg", String.format("%d번 게시물이 수정되었습니다", id));
+		rs.put("id", id);
+		
+		return rs;
+	}
 }
