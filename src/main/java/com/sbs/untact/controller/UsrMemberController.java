@@ -77,4 +77,14 @@ public class UsrMemberController {
 		session.setAttribute("loginedMemberId", existingMember.getId());
 		return new ResultData("S-1", String.format("%s님 환영합니다.", existingMember.getNickname()));
 	}
+	@RequestMapping("/usr/member/doLogout")
+	@ResponseBody
+	public ResultData doLogout(HttpSession session) {
+		if(session.getAttribute("loginedMemberId") == null) {
+			return new ResultData("S-2", "이미 로그아웃 되었습니다.");
+		}
+		session.removeAttribute("loginedMemberId");
+		
+		return new ResultData("S-1", "로그아웃 되었습니다.");
+	}
 }
