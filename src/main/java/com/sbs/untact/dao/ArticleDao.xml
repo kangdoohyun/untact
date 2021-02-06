@@ -16,6 +16,7 @@
 		SELECT *
 		FROM article
 		WHERE 1
+		<if test="searchKeyword != null">
 			<if test="searchKeywordType == 'title'">
 				AND title LIKE CONCAT('%', #{searchKeyword}, '%')
 			</if>
@@ -26,6 +27,7 @@
 				AND (title LIKE CONCAT('%', #{searchKeyword}, '%') OR
 				`body` LIKE CONCAT('%', #{searchKeyword}, '%'))
 			</if>
+		</if>	
 		ORDER BY id DESC
 	</select>
 	<!-- public int addArticle(@Param(value = "title") String title, @Param(value = "body") String body); -->
