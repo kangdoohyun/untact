@@ -24164,3 +24164,79 @@ Action:
 
 Identify and stop the process that's listening on port 8021 or configure this application to listen on another port.
 
+2021-02-07 01:06:03 [INFO ] o.a.c.c.C.[Tomcat-9].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2021-02-07 01:06:03 [INFO ] o.s.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+2021-02-07 01:06:03 [INFO ] o.s.web.servlet.DispatcherServlet - Completed initialization in 0 ms
+2021-02-07 01:06:03 [DEBUG] org.mybatis.spring.SqlSessionUtils - Creating a new SqlSession
+2021-02-07 01:06:03 [DEBUG] org.mybatis.spring.SqlSessionUtils - SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@6482fafd] was not registered for synchronization because synchronization is not active
+2021-02-07 01:06:03 [DEBUG] o.s.jdbc.datasource.DataSourceUtils - Fetching JDBC Connection from DataSource
+2021-02-07 01:06:03 [DEBUG] com.zaxxer.hikari.HikariConfig - HikariPool-3 - configuration:
+2021-02-07 01:06:03 [DEBUG] com.zaxxer.hikari.HikariConfig - allowPoolSuspension.............false
+2021-02-07 01:06:03 [DEBUG] com.zaxxer.hikari.HikariConfig - autoCommit......................true
+2021-02-07 01:06:03 [DEBUG] com.zaxxer.hikari.HikariConfig - catalog.........................none
+2021-02-07 01:06:03 [DEBUG] com.zaxxer.hikari.HikariConfig - connectionInitSql...............none
+2021-02-07 01:06:03 [DEBUG] com.zaxxer.hikari.HikariConfig - connectionTestQuery.............none
+2021-02-07 01:06:03 [DEBUG] com.zaxxer.hikari.HikariConfig - connectionTimeout...............30000
+2021-02-07 01:06:03 [DEBUG] com.zaxxer.hikari.HikariConfig - dataSource......................none
+2021-02-07 01:06:03 [DEBUG] com.zaxxer.hikari.HikariConfig - dataSourceClassName.............none
+2021-02-07 01:06:03 [DEBUG] com.zaxxer.hikari.HikariConfig - dataSourceJNDI..................none
+2021-02-07 01:06:03 [DEBUG] com.zaxxer.hikari.HikariConfig - dataSourceProperties............{password=<masked>}
+2021-02-07 01:06:03 [DEBUG] com.zaxxer.hikari.HikariConfig - driverClassName................."net.sf.log4jdbc.sql.jdbcapi.DriverSpy"
+2021-02-07 01:06:03 [DEBUG] com.zaxxer.hikari.HikariConfig - exceptionOverrideClassName......none
+2021-02-07 01:06:03 [DEBUG] com.zaxxer.hikari.HikariConfig - healthCheckProperties...........{}
+2021-02-07 01:06:03 [DEBUG] com.zaxxer.hikari.HikariConfig - healthCheckRegistry.............none
+2021-02-07 01:06:03 [DEBUG] com.zaxxer.hikari.HikariConfig - idleTimeout.....................600000
+2021-02-07 01:06:03 [DEBUG] com.zaxxer.hikari.HikariConfig - initializationFailTimeout.......1
+2021-02-07 01:06:03 [DEBUG] com.zaxxer.hikari.HikariConfig - isolateInternalQueries..........false
+2021-02-07 01:06:03 [DEBUG] com.zaxxer.hikari.HikariConfig - jdbcUrl.........................jdbc:log4jdbc:mysql://127.0.0.1:3306/untact?useUnicode=true&characterEncoding=utf8&autoReconnect=true&serverTimezone=Asia/Seoul&useOldAliasMetadataBehavior=true&zeroDateTimeNehavior=convertToNull
+2021-02-07 01:06:03 [DEBUG] com.zaxxer.hikari.HikariConfig - leakDetectionThreshold..........0
+2021-02-07 01:06:03 [DEBUG] com.zaxxer.hikari.HikariConfig - maxLifetime.....................1800000
+2021-02-07 01:06:03 [DEBUG] com.zaxxer.hikari.HikariConfig - maximumPoolSize.................10
+2021-02-07 01:06:03 [DEBUG] com.zaxxer.hikari.HikariConfig - metricRegistry..................none
+2021-02-07 01:06:03 [DEBUG] com.zaxxer.hikari.HikariConfig - metricsTrackerFactory...........none
+2021-02-07 01:06:03 [DEBUG] com.zaxxer.hikari.HikariConfig - minimumIdle.....................10
+2021-02-07 01:06:03 [DEBUG] com.zaxxer.hikari.HikariConfig - password........................<masked>
+2021-02-07 01:06:03 [DEBUG] com.zaxxer.hikari.HikariConfig - poolName........................"HikariPool-3"
+2021-02-07 01:06:03 [DEBUG] com.zaxxer.hikari.HikariConfig - readOnly........................false
+2021-02-07 01:06:03 [DEBUG] com.zaxxer.hikari.HikariConfig - registerMbeans..................false
+2021-02-07 01:06:03 [DEBUG] com.zaxxer.hikari.HikariConfig - scheduledExecutor...............none
+2021-02-07 01:06:03 [DEBUG] com.zaxxer.hikari.HikariConfig - schema..........................none
+2021-02-07 01:06:03 [DEBUG] com.zaxxer.hikari.HikariConfig - threadFactory...................internal
+2021-02-07 01:06:03 [DEBUG] com.zaxxer.hikari.HikariConfig - transactionIsolation............default
+2021-02-07 01:06:03 [DEBUG] com.zaxxer.hikari.HikariConfig - username........................"kang"
+2021-02-07 01:06:03 [DEBUG] com.zaxxer.hikari.HikariConfig - validationTimeout...............5000
+2021-02-07 01:06:03 [INFO ] com.zaxxer.hikari.HikariDataSource - HikariPool-3 - Starting...
+2021-02-07 01:06:03 [DEBUG] com.zaxxer.hikari.pool.HikariPool - HikariPool-3 - Added connection net.sf.log4jdbc.sql.jdbcapi.ConnectionSpy@3992ad0a
+2021-02-07 01:06:03 [INFO ] com.zaxxer.hikari.HikariDataSource - HikariPool-3 - Start completed.
+2021-02-07 01:06:03 [DEBUG] o.m.s.t.SpringManagedTransaction - JDBC Connection [HikariProxyConnection@1987184172 wrapping net.sf.log4jdbc.sql.jdbcapi.ConnectionSpy@3992ad0a] will not be managed by Spring
+2021-02-07 01:06:03 [DEBUG] com.sbs.untact.dao.MemberDao.join - ==>  Preparing: INSERT INTO `member` SET regDate = NOW(), updateDate = NOW(), loginId = ?, loginPw = ?, `name` = ?, nickname = ?, cellphoneNo = ?, email = ?
+2021-02-07 01:06:03 [DEBUG] com.sbs.untact.dao.MemberDao.join - ==> Parameters: hong(String), hong123(String), 홍길동(String), honggil(String), 01012341234(String), hong@naver.com(String)
+2021-02-07 01:06:03 [DEBUG] jdbc.sqltiming -  com.zaxxer.hikari.pool.ProxyPreparedStatement.execute(ProxyPreparedStatement.java:44)
+21. INSERT INTO `member` SET regDate = NOW(), updateDate = NOW(), loginId = 'hong', loginPw = 'hong123', 
+`name` = '홍길동', nickname = 'honggil', cellphoneNo = '01012341234', email = 'hong@naver.com' 
+ {executed in 13 msec}
+2021-02-07 01:06:03 [DEBUG] com.sbs.untact.dao.MemberDao.join - <==    Updates: 1
+2021-02-07 01:06:03 [DEBUG] jdbc.sqltiming -  com.zaxxer.hikari.pool.ProxyStatement.getGeneratedKeys(ProxyStatement.java:230)
+21. getGeneratedKeys on query: INSERT INTO `member` SET regDate = NOW(), updateDate = NOW(), loginId 
+= 'hong', loginPw = 'hong123', `name` = '홍길동', nickname = 'honggil', cellphoneNo = '01012341234', 
+email = 'hong@naver.com' 
+ {executed in 1 msec}
+2021-02-07 01:06:03 [INFO ] jdbc.resultsettable - 
+|--------------|
+|generated_key |
+|--------------|
+|2             |
+|--------------|
+
+2021-02-07 01:06:03 [DEBUG] org.mybatis.spring.SqlSessionUtils - Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@6482fafd]
+2021-02-07 01:06:03 [DEBUG] com.zaxxer.hikari.pool.HikariPool - HikariPool-3 - Pool stats (total=1, active=0, idle=1, waiting=0)
+2021-02-07 01:06:03 [DEBUG] com.zaxxer.hikari.pool.HikariPool - HikariPool-3 - Added connection net.sf.log4jdbc.sql.jdbcapi.ConnectionSpy@7e7181c3
+2021-02-07 01:06:03 [DEBUG] com.zaxxer.hikari.pool.HikariPool - HikariPool-3 - Added connection net.sf.log4jdbc.sql.jdbcapi.ConnectionSpy@3f4c8bf8
+2021-02-07 01:06:03 [DEBUG] com.zaxxer.hikari.pool.HikariPool - HikariPool-3 - Added connection net.sf.log4jdbc.sql.jdbcapi.ConnectionSpy@eb91721
+2021-02-07 01:06:03 [DEBUG] com.zaxxer.hikari.pool.HikariPool - HikariPool-3 - Added connection net.sf.log4jdbc.sql.jdbcapi.ConnectionSpy@5f6374b7
+2021-02-07 01:06:03 [DEBUG] com.zaxxer.hikari.pool.HikariPool - HikariPool-3 - Added connection net.sf.log4jdbc.sql.jdbcapi.ConnectionSpy@423da581
+2021-02-07 01:06:03 [DEBUG] com.zaxxer.hikari.pool.HikariPool - HikariPool-3 - Added connection net.sf.log4jdbc.sql.jdbcapi.ConnectionSpy@5b2d4f6d
+2021-02-07 01:06:03 [DEBUG] com.zaxxer.hikari.pool.HikariPool - HikariPool-3 - Added connection net.sf.log4jdbc.sql.jdbcapi.ConnectionSpy@2d60f8f5
+2021-02-07 01:06:03 [DEBUG] com.zaxxer.hikari.pool.HikariPool - HikariPool-3 - Added connection net.sf.log4jdbc.sql.jdbcapi.ConnectionSpy@797ac3ad
+2021-02-07 01:06:03 [DEBUG] com.zaxxer.hikari.pool.HikariPool - HikariPool-3 - Added connection net.sf.log4jdbc.sql.jdbcapi.ConnectionSpy@23fd04cf
+2021-02-07 01:06:03 [DEBUG] com.zaxxer.hikari.pool.HikariPool - HikariPool-3 - After adding stats (total=10, active=0, idle=10, waiting=0)
