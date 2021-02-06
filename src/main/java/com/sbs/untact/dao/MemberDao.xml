@@ -15,4 +15,15 @@
 		cellphoneNo = #{cellphoneNo},
 		email = #{email}
 	</insert>
+	
+	<select id="getMember" resultType="Member">
+		SELECT *
+		FROM `member`
+		WHERE id = #{id}
+	</select>
+	<select id="getMemberByLoginId" resultType="Member">
+		SELECT *
+		FROM `member`
+		WHERE loginId = #{loginId}
+	</select>
 </mapper>
