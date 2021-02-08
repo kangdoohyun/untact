@@ -16,27 +16,28 @@
 		SELECT *
 		FROM article
 		WHERE 1
-		<if test="searchKeyword != null">
-			<if test="searchKeywordType == 'title'">
-				AND title LIKE CONCAT('%', #{searchKeyword}, '%')
+			<if test = "searchKeyword != null">
+				<if test="searchKeywordType == 'title'">
+					AND title LIKE CONCAT('%', #{searchKeyword}, '%')
+				</if>
+				<if test="searchKeywordType == 'body'">
+					AND `body` LIKE CONCAT('%', #{searchKeyword}, '%')
+				</if>
+				<if test="searchKeywordType == 'titleAndBody'">
+					AND (title LIKE CONCAT('%', #{searchKeyword}, '%') OR
+					`body` LIKE CONCAT('%', #{searchKeyword}, '%'))
+				</if>
 			</if>
-			<if test="searchKeywordType == 'body'">
-				AND `body` LIKE CONCAT('%', #{searchKeyword}, '%')
-			</if>
-			<if test="searchKeywordType == 'titleAndBody'">
-				AND (title LIKE CONCAT('%', #{searchKeyword}, '%') OR
-				`body` LIKE CONCAT('%', #{searchKeyword}, '%'))
-			</if>
-		</if>	
 		ORDER BY id DESC
 	</select>
 	<!-- public int addArticle(@Param(value = "title") String title, @Param(value = "body") String body); -->
-	<insert id="addArticle">
+	<insert id="addArticle" useGeneratedKeys="true" keyProperty="id">
 		INSERT INTO article
 		SET regDate = NOW(),
 		updateDate = NOW(),
 		title = #{title},
-		body = #{body}
+		body = #{body},
+		memberId = #{memberId}
 	</insert>
 	<!-- public void deleteArticle(@Param(value = "id") int id); -->
 	<delete id="deleteArticle">

@@ -36,4 +36,8 @@ public class MemberService {
 		return new ResultData("S-1", "회원 정보를 수정하였습니다.");
 	}
 
+	public boolean isAdmin(int actorId) {
+		return actorId == 1;
+	}
+
 }
