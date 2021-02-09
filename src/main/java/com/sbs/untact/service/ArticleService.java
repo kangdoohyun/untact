@@ -59,4 +59,12 @@ public class ArticleService {
 	public ResultData getActorCanDeleteRd(Article article, int actorId) {
 		return getActorCanModifyRd(article, actorId);
 	}
+
+	public Article getForPrintArticle(Integer id) {
+		return articleDao.getForPrintArticle(id);
+	}
+
+	public List<Article> getForPrintArticles(String searchKeywordType, String searchKeyword) {
+		return articleDao.getForPrintArticles(searchKeywordType, searchKeyword);
+	}
 }

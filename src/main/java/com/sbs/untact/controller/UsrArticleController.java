@@ -23,7 +23,7 @@ public class UsrArticleController {
 	
 	@RequestMapping("/usr/article/list")
 	@ResponseBody
-	public List<Article> showList(String searchKeywordType, String searchKeyword){
+	public ResultData showList(String searchKeywordType, String searchKeyword){
 		if(searchKeywordType != null) {
 			searchKeywordType = searchKeywordType.trim();
 		}
@@ -36,13 +36,20 @@ public class UsrArticleController {
 		if(searchKeyword != null) {
 			searchKeyword = searchKeyword.trim();
 		}
-		return articleService.getArticles(searchKeywordType, searchKeyword);
+		List<Article> articles = articleService.getForPrintArticles(searchKeywordType, searchKeyword); 
+		return new ResultData("S-1", "성공", "arrticles", articles);
 	}
 	@RequestMapping("/usr/article/detail")
 	@ResponseBody
-	public Article showDetail(int id) {
-		Article article = articleService.getArticle(id);
-		return article;
+	public ResultData showDetail(Integer id) {
+		if(id == null) {
+			return new ResultData("F-1", "ID를 입력해주세요");
+		}
+		Article article = articleService.getForPrintArticle(id);
+		if(article == null) {
+			return new ResultData("F-2", "존재하지 않는 게시물번호입니다");
+		}
+		return new ResultData("S-1", "성공했습니다", "article", article);
 	}
 	@RequestMapping("/usr/article/doAdd")
 	@ResponseBody

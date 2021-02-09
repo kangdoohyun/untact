@@ -11,10 +11,39 @@
 		WHERE id
 		= #{id}
 	</select>
+	<select id="getForPrintArticle" resultType="Article">
+		SELECT a.*, 
+		IFNULL(m.nickname, "탈퇴회원") AS extra__writer
+		FROM article a
+		LEFT JOIN `member` m
+		ON m.id = a.memberId
+		WHERE a.id = #{id}
+	</select>
 	<!-- public List<Article> getArticles(@Param(value = "searchKeywordType") String searchKeywordType, @Param(value = "searchKeyword") String searchKeyword); -->
 	<select id="getArticles" resultType="Article">
 		SELECT *
 		FROM article
+		WHERE 1
+			<if test = "searchKeyword != null">
+				<if test="searchKeywordType == 'title'">
+					AND title LIKE CONCAT('%', #{searchKeyword}, '%')
+				</if>
+				<if test="searchKeywordType == 'body'">
+					AND `body` LIKE CONCAT('%', #{searchKeyword}, '%')
+				</if>
+				<if test="searchKeywordType == 'titleAndBody'">
+					AND (title LIKE CONCAT('%', #{searchKeyword}, '%') OR
+					`body` LIKE CONCAT('%', #{searchKeyword}, '%'))
+				</if>
+			</if>
+		ORDER BY id DESC
+	</select>
+	<select id="getForPrintArticles" resultType="Article">
+		SELECT a.*, 
+		IFNULL(m.nickname, "탈퇴회원") AS extra__writer
+		FROM article a
+		LEFT JOIN `member` m
+		ON m.id = a.memberId
 		WHERE 1
 			<if test = "searchKeyword != null">
 				<if test="searchKeywordType == 'title'">
