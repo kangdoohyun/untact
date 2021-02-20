@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.sbs.untact.dto.Article;
 import com.sbs.untact.dto.Board;
+import com.sbs.untact.dto.Reply;
 import com.sbs.untact.dto.ResultData;
 import com.sbs.untact.service.ArticleService;
 import com.sbs.untact.util.Util;
@@ -127,5 +128,54 @@ public class UsrArticleController {
 		
 		param.put("memberId", loginedMemberId);
 		return articleService.addReply(param);
+	}
+	@RequestMapping("/usr/article/doDeleteReply")
+	@ResponseBody
+	public ResultData doDeleteReply(Integer id, HttpSession session) {
+		int loginedMemberId = Util.getAsInt(session.getAttribute("loginedMemberId"), 0);
+		
+		if(id == null) {
+			return new ResultData("F-2", "삭제할 댓글 번호를 입력해주세요");
+		}
+		Reply reply = articleService.getReply(id);
+		if(reply == null) {
+			return new ResultData("F-1", "존재하지 않는 댓글 입니다");
+		}
+		ResultData actorCanDeleteRd = articleService.getActorCanDeleteRdReply(reply, loginedMemberId);
+		if(actorCanDeleteRd.isFail()) {
+			return actorCanDeleteRd;
+		}
+		return articleService.deleteReply(id);
+	}
+	@RequestMapping("/usr/article/doModifyReply")
+	@ResponseBody
+	public ResultData doModifyReply(Integer id, String body, HttpSession session) {
+		int loginedMemberId = Util.getAsInt(session.getAttribute("loginedMemberId"), 0);
+		
+		if(id == null) {
+			return new ResultData("F-1", "id를 입력해주세요");
+		}
+		if(body == null) {
+			return new ResultData("F-1", "body를 입력해주세요");
+		}
+		Reply reply = articleService.getReply(id);
+		if(reply == null) {
+			return new ResultData("F-1", "존재하지 않는 댓글 입니다");
+		}
+		ResultData actorCanModifyRd = articleService.getActorCanModifyRdReply(reply, loginedMemberId);
+		if(actorCanModifyRd.isFail()) {
+			return actorCanModifyRd;
+		}
+		return articleService.modifyReply(id, body);
+	}
+	@RequestMapping("/usr/article/replies")
+	@ResponseBody
+	public ResultData replies(Integer articleId, @RequestParam(defaultValue = "1") int page) {
+		if(articleId == null) {
+			return new ResultData("F-1", "댓글을 확인할 게시물 번호 를 입력해주세요");
+		}
+		int itemsInAPage = 3;
+		List<Reply> replies = articleService.getForPrintReplies(page, itemsInAPage); 
+		return new ResultData("S-1", "성공", "replies", replies);
 	}
 }

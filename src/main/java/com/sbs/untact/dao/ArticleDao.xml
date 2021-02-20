@@ -10,7 +10,8 @@
 		FROM board
 		WHERE id
 		= #{id}
-	</select><select id="getArticle" resultType="Article">
+	</select>
+	<select id="getArticle" resultType="Article">
 		SELECT *
 		FROM article
 		WHERE id
@@ -109,4 +110,38 @@
 		articleId = #{articleId},
 		body = #{body}
 	</insert>
+	<select id="getReply" resultType="Reply">
+		SELECT *
+		FROM reply
+		WHERE id
+		= #{id}
+	</select>
+	<select id="getForPrintReplies" resultType="Reply">
+		SELECT DISTINCT r.*, 	
+		IFNULL(m.nickname, "탈퇴회원") AS extra__writer
+		FROM reply r	LEFT JOIN article a	
+		ON r.memberId = a.memberId	
+		LEFT JOIN `member` m	
+		ON m.id = a.memberId
+		WHERE 1
+		ORDER BY id DESC
+		<if test="limitStart != null and limitTake != null">
+			LIMIT #{limitStart}, #{limitTake}	
+		</if>
+		
+	</select>
+	<delete id="deleteReply">
+		DELETE FROM reply
+		WHERE id = #{id}
+	</delete>
+	<update id="modifyReply">
+		UPDATE reply
+		<set>
+			<if test="body != null">
+				updateDate = NOW(),
+				body = #{body}
+			</if>
+		</set>
+		WHERE id = #{id}
+	</update>
 </mapper>

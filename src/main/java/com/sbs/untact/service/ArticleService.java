@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import com.sbs.untact.dao.ArticleDao;
 import com.sbs.untact.dto.Article;
 import com.sbs.untact.dto.Board;
+import com.sbs.untact.dto.Reply;
 import com.sbs.untact.dto.ResultData;
 import com.sbs.untact.util.Util;
 
@@ -82,4 +83,42 @@ public class ArticleService {
 
 		return new ResultData("S-1", "성공하였습니다.", "id", id);
 	}
+
+	public Reply getReply(Integer id) {
+		return articleDao.getReply(id);
+	}
+	
+	public ResultData getActorCanModifyRdReply(Reply reply, int actorId) {
+		if(reply.getMemberId() == actorId) {
+			return new ResultData("S-1", "가능합니다");
+		}
+		
+		if(memberService.isAdmin(actorId)) {
+			return new ResultData("S-2", "관리자 권한으로 가능합니다");
+		}	
+		return new ResultData("F-1", "권한이 없습니다");
+	}
+
+	public ResultData getActorCanDeleteRdReply(Reply reply, int actorId) {
+		return getActorCanModifyRdReply(reply, actorId);
+	}
+
+	public ResultData deleteReply(Integer id) {
+		articleDao.deleteReply(id);
+
+		return new ResultData("S-1", "삭제하였습니다.", "id", id);
+	}
+
+	public ResultData modifyReply(Integer id, String body) {
+		articleDao.modifyReply(id, body);
+
+		return new ResultData("S-1", "댓글을 수정하였습니다.", "id", id);
+	}
+	
+	public List<Reply> getForPrintReplies(int page, int itemsInAPage) {
+		int limitStart = (page * itemsInAPage) - itemsInAPage;
+		int limitTake = itemsInAPage;
+		return articleDao.getForPrintReplies(limitStart, limitTake);
+	}
+
 }
