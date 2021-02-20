@@ -5,7 +5,12 @@
   
 <mapper namespace="com.sbs.untact.dao.ArticleDao">
 	<!-- public Article getArticle(@Param(value = "id") int id); -->
-	<select id="getArticle" resultType="Article">
+	<select id="getBoard" resultType="Board">
+		SELECT *
+		FROM board
+		WHERE id
+		= #{id}
+	</select><select id="getArticle" resultType="Article">
 		SELECT *
 		FROM article
 		WHERE id
