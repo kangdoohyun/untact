@@ -23,7 +23,7 @@ public class UsrArticleController {
 	
 	@RequestMapping("/usr/article/list")
 	@ResponseBody
-	public ResultData showList(String searchKeywordType, String searchKeyword){
+	public ResultData showList(String searchKeywordType, String searchKeyword, @RequestParam(defaultValue = "1") int page, @RequestParam(defaultValue = "1") int boardId){
 		if(searchKeywordType != null) {
 			searchKeywordType = searchKeywordType.trim();
 		}
@@ -36,7 +36,8 @@ public class UsrArticleController {
 		if(searchKeyword != null) {
 			searchKeyword = searchKeyword.trim();
 		}
-		List<Article> articles = articleService.getForPrintArticles(searchKeywordType, searchKeyword); 
+		int itemsInAPage = 20;
+		List<Article> articles = articleService.getForPrintArticles(searchKeywordType, searchKeyword, page,  itemsInAPage, boardId); 
 		return new ResultData("S-1", "성공", "arrticles", articles);
 	}
 	@RequestMapping("/usr/article/detail")
@@ -55,9 +56,7 @@ public class UsrArticleController {
 	@ResponseBody
 	public ResultData doAdd(@RequestParam Map<String, Object> param, HttpSession session) {
 		int loginedMemberId = Util.getAsInt(session.getAttribute("loginedMemberId"), 0);
-		if(loginedMemberId == 0) {
-			return new ResultData("F-2", "로그인 후 이용해주세요.");
-		}
+		
 		if (param.get("title") == null) {
 			return new ResultData("F-1", "title을 입력해주세요.");
 		}
@@ -72,9 +71,7 @@ public class UsrArticleController {
 	@ResponseBody
 	public ResultData doDelete(Integer id, HttpSession session) {
 		int loginedMemberId = Util.getAsInt(session.getAttribute("loginedMemberId"), 0);
-		if(loginedMemberId == 0) {
-			return new ResultData("F-2", "로그인 후 이용해주세요.");
-		}
+		
 		if(id == null) {
 			return new ResultData("F-2", "게시물 번호를 입력해주세요");
 		}
@@ -92,9 +89,7 @@ public class UsrArticleController {
 	@ResponseBody
 	public ResultData doModify(Integer id, String title, String body, HttpSession session) {
 		int loginedMemberId = Util.getAsInt(session.getAttribute("loginedMemberId"), 0);
-		if(loginedMemberId == 0) {
-			return new ResultData("F-2", "로그인 후 이용해주세요.");
-		}
+		
 		if(id == null) {
 			return new ResultData("F-1", "id를 입력해주세요");
 		}

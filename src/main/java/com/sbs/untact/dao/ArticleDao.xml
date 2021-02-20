@@ -45,6 +45,9 @@
 		LEFT JOIN `member` m
 		ON m.id = a.memberId
 		WHERE 1
+			<if test="boardId != null">
+				AND a.boardId = #{boardId}
+			</if>
 			<if test = "searchKeyword != null">
 				<if test="searchKeywordType == 'title'">
 					AND title LIKE CONCAT('%', #{searchKeyword}, '%')
@@ -57,7 +60,11 @@
 					`body` LIKE CONCAT('%', #{searchKeyword}, '%'))
 				</if>
 			</if>
-		ORDER BY id DESC
+		ORDER BY id DESC	
+		<if test="limitStart != null and limitTake != null">
+			LIMIT #{limitStart}, #{limitTake}	
+		</if>
+		
 	</select>
 	<!-- public int addArticle(@Param(value = "title") String title, @Param(value = "body") String body); -->
 	<insert id="addArticle" useGeneratedKeys="true" keyProperty="id">
