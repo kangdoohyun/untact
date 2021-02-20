@@ -23,7 +23,7 @@ public class UsrMemberController {
 	@ResponseBody
 	public ResultData doJoin(@RequestParam Map<String, Object> param) {
 		if (param.get("loginId") == null) {
-			return new ResultData("F-1", "ID를 입력해주세요.");
+			return new ResultData("F-1", "로그인ID를 입력해주세요.");
 		}
 		
 		Member existingMember = memberService.getMemberByLoginId((String) param.get("loginId"));

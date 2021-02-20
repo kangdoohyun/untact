@@ -66,7 +66,7 @@ public class UsrArticleController {
 			return new ResultData("F-1", "title을 입력해주세요.");
 		}
 
-		if (param.get("title") == null) {
+		if (param.get("body") == null) {
 			return new ResultData("F-1", "body를 입력해주세요.");
 		}
 		param.put("memberId", loginedMemberId);
@@ -113,5 +113,19 @@ public class UsrArticleController {
 			return actorCanModifyRd;
 		}
 		return articleService.modifyArticle(id, title, body);
+	}
+	@RequestMapping("/usr/article/doAddReply")
+	@ResponseBody
+	public ResultData doAddReply(@RequestParam Map<String, Object> param, HttpSession session) {
+		int loginedMemberId = Util.getAsInt(session.getAttribute("loginedMemberId"), 0);
+		if (param.get("articleId") == null) {
+			return new ResultData("F-1", "articleId를 입력해주세요.");
+		}
+		if (param.get("body") == null) {
+			return new ResultData("F-1", "body을 입력해주세요.");
+		}
+		
+		param.put("memberId", loginedMemberId);
+		return articleService.addReply(param);
 	}
 }
