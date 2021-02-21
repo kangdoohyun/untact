@@ -31,13 +31,7 @@ public interface ArticleDao {
 
 	public void addReply(Map<String, Object> param);
 
-	public Reply getForPrintReply(@Param("id") Integer id);
+	
 
-	public Reply getReply(@Param("id")int id);
 
-	public void deleteReply(@Param("id") Integer id);
-
-	public void modifyReply(@Param("id") Integer id, @Param("body") String body);
-
-	public List<Reply> getForPrintReplies(@Param("limitStart")int limitStart, @Param("limitTake") int limitTake);
 }

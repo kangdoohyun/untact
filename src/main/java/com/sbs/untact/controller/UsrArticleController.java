@@ -3,7 +3,7 @@ package com.sbs.untact.controller;
 import java.util.List;
 import java.util.Map;
 
-import javax.servlet.http.HttpSession;
+import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -13,10 +13,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.sbs.untact.dto.Article;
 import com.sbs.untact.dto.Board;
-import com.sbs.untact.dto.Reply;
 import com.sbs.untact.dto.ResultData;
 import com.sbs.untact.service.ArticleService;
-import com.sbs.untact.util.Util;
 
 @Controller
 public class UsrArticleController {
@@ -60,8 +58,8 @@ public class UsrArticleController {
 	}
 	@RequestMapping("/usr/article/doAdd")
 	@ResponseBody
-	public ResultData doAdd(@RequestParam Map<String, Object> param, HttpSession session) {
-		int loginedMemberId = Util.getAsInt(session.getAttribute("loginedMemberId"), 0);
+	public ResultData doAdd(@RequestParam Map<String, Object> param, HttpServletRequest req) {
+		int loginedMemberId = (int) req.getAttribute("loginedMemberId");
 		
 		if (param.get("title") == null) {
 			return new ResultData("F-1", "title을 입력해주세요.");
@@ -75,8 +73,8 @@ public class UsrArticleController {
 	}
 	@RequestMapping("/usr/article/doDelete")
 	@ResponseBody
-	public ResultData doDelete(Integer id, HttpSession session) {
-		int loginedMemberId = Util.getAsInt(session.getAttribute("loginedMemberId"), 0);
+	public ResultData doDelete(Integer id, HttpServletRequest req) {
+		int loginedMemberId = (int) req.getAttribute("loginedMemberId");
 		
 		if(id == null) {
 			return new ResultData("F-2", "게시물 번호를 입력해주세요");
@@ -93,8 +91,8 @@ public class UsrArticleController {
 	}
 	@RequestMapping("/usr/article/doModify")
 	@ResponseBody
-	public ResultData doModify(Integer id, String title, String body, HttpSession session) {
-		int loginedMemberId = Util.getAsInt(session.getAttribute("loginedMemberId"), 0);
+	public ResultData doModify(Integer id, String title, String body, HttpServletRequest req) {
+		int loginedMemberId = (int) req.getAttribute("loginedMemberId");
 		
 		if(id == null) {
 			return new ResultData("F-1", "id를 입력해주세요");
@@ -117,8 +115,8 @@ public class UsrArticleController {
 	}
 	@RequestMapping("/usr/article/doAddReply")
 	@ResponseBody
-	public ResultData doAddReply(@RequestParam Map<String, Object> param, HttpSession session) {
-		int loginedMemberId = Util.getAsInt(session.getAttribute("loginedMemberId"), 0);
+	public ResultData doAddReply(@RequestParam Map<String, Object> param, HttpServletRequest req) {
+		int loginedMemberId = (int) req.getAttribute("loginedMemberId");
 		if (param.get("articleId") == null) {
 			return new ResultData("F-1", "articleId를 입력해주세요.");
 		}
@@ -128,54 +126,5 @@ public class UsrArticleController {
 		
 		param.put("memberId", loginedMemberId);
 		return articleService.addReply(param);
-	}
-	@RequestMapping("/usr/article/doDeleteReply")
-	@ResponseBody
-	public ResultData doDeleteReply(Integer id, HttpSession session) {
-		int loginedMemberId = Util.getAsInt(session.getAttribute("loginedMemberId"), 0);
-		
-		if(id == null) {
-			return new ResultData("F-2", "삭제할 댓글 번호를 입력해주세요");
-		}
-		Reply reply = articleService.getReply(id);
-		if(reply == null) {
-			return new ResultData("F-1", "존재하지 않는 댓글 입니다");
-		}
-		ResultData actorCanDeleteRd = articleService.getActorCanDeleteRdReply(reply, loginedMemberId);
-		if(actorCanDeleteRd.isFail()) {
-			return actorCanDeleteRd;
-		}
-		return articleService.deleteReply(id);
-	}
-	@RequestMapping("/usr/article/doModifyReply")
-	@ResponseBody
-	public ResultData doModifyReply(Integer id, String body, HttpSession session) {
-		int loginedMemberId = Util.getAsInt(session.getAttribute("loginedMemberId"), 0);
-		
-		if(id == null) {
-			return new ResultData("F-1", "id를 입력해주세요");
-		}
-		if(body == null) {
-			return new ResultData("F-1", "body를 입력해주세요");
-		}
-		Reply reply = articleService.getReply(id);
-		if(reply == null) {
-			return new ResultData("F-1", "존재하지 않는 댓글 입니다");
-		}
-		ResultData actorCanModifyRd = articleService.getActorCanModifyRdReply(reply, loginedMemberId);
-		if(actorCanModifyRd.isFail()) {
-			return actorCanModifyRd;
-		}
-		return articleService.modifyReply(id, body);
-	}
-	@RequestMapping("/usr/article/replies")
-	@ResponseBody
-	public ResultData replies(Integer articleId, @RequestParam(defaultValue = "1") int page) {
-		if(articleId == null) {
-			return new ResultData("F-1", "댓글을 확인할 게시물 번호 를 입력해주세요");
-		}
-		int itemsInAPage = 3;
-		List<Reply> replies = articleService.getForPrintReplies(page, itemsInAPage); 
-		return new ResultData("S-1", "성공", "replies", replies);
 	}
 }

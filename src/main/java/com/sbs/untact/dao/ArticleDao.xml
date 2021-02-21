@@ -79,7 +79,8 @@
 		updateDate = NOW(),
 		title = #{title},
 		body = #{body},
-		memberId = #{memberId}
+		memberId = #{memberId},
+		boardId = #{boardId}
 	</insert>
 	<!-- public void deleteArticle(@Param(value = "id") int id); -->
 	<delete id="deleteArticle">

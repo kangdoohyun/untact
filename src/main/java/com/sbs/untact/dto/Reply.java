@@ -12,6 +12,9 @@ public class Reply {
 	private String regDate;
 	private String updateDate;
 	private int memberId;
-	private int articleId;
+	private int relId;
+	private String relTypeCode;
 	private String body;
+	
+	private String extra__writer;
 }
