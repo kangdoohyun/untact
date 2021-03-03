@@ -46,4 +46,10 @@ public class ReplyService {
 
 		return new ResultData("S-1", "삭제하였습니다.", "id", id);
 	}
+
+	public ResultData modifyReply(int id, String body) {
+		replyDao.modifyReply(id, body);
+		
+		return new ResultData("S-1", "수정했습니다", "id", id);
+	}
 }

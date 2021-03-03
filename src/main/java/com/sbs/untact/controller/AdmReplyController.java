@@ -17,13 +17,13 @@ import com.sbs.untact.service.ArticleService;
 import com.sbs.untact.service.ReplyService;
 
 @Controller
-public class UsrReplyController {
+public class AdmReplyController {
 	@Autowired
 	private ReplyService replyService;
 	@Autowired
 	private ArticleService articleService;
 	
-	@RequestMapping("/usr/reply/list")
+	@RequestMapping("/adm/reply/list")
 	@ResponseBody
 	public ResultData showList(String relTypeCode, Integer relId, @RequestParam(defaultValue = "1") int page){
 		if(relTypeCode == null) {
@@ -44,7 +44,7 @@ public class UsrReplyController {
 		List<Reply> replies = replyService.getForPrintReplies(relTypeCode, relId, page, itemsInAPage); 
 		return new ResultData("S-1", "성공", "replies", replies);
 	}
-	@RequestMapping("/usr/reply/doDelete")
+	@RequestMapping("/adm/reply/doDelete")
 	@ResponseBody
 	public ResultData doDelete(Integer id, HttpServletRequest req) {
 		int loginedMemberId = (int)req.getAttribute("loginedMemberId");
@@ -62,7 +62,7 @@ public class UsrReplyController {
 		}
 		return replyService.deleteReply(id);
 	}
-	@RequestMapping("/usr/reply/doModify")
+	@RequestMapping("/adm/reply/doModify")
 	@ResponseBody
 	public ResultData doModify(Integer id, String body, HttpServletRequest req) {
 		int loginedMemberId = (int)req.getAttribute("loginedMemberId");
